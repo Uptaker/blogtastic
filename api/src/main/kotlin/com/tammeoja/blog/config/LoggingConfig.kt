@@ -13,7 +13,8 @@ class LoggingConfig {
       setIncludeQueryString(true)
       setIncludeClientInfo(true)
       setIncludePayload(false)
-      setIncludeHeaders(true)
+      setIncludeHeaders(false)
+      setBeforeMessageSuffix("")
       setBeforeMessagePrefix("")
     }
   }
