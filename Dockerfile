@@ -8,7 +8,7 @@ COPY ui ./
 
 # && npm run gzip TODO
 RUN npm run build
-# RUN npm run check TODO
+RUN npm run check
 
 FROM openjdk:17-alpine as build-server
 WORKDIR /app
@@ -16,7 +16,6 @@ WORKDIR /app
 COPY api/gradlew ./
 COPY api/gradle gradle/
 
-RUN echo "wtf"
 RUN ./gradlew --version
 
 COPY api/*gradle* ./

@@ -1,13 +1,12 @@
 <script lang="ts">
-  import SelectField from './SelectField.svelte'
-  import {lang} from '../i18n'
+    import SelectField from './SelectField.svelte'
 
-  export let month: number|string = new Date().getMonth()
+    export let month: number|string = new Date().getMonth()
   export let from = ''
   export let until = ''
   export let wholeOption = ''
 
-  const format = new Intl.DateTimeFormat(lang, {month: 'long'}).format
+  const format = new Intl.DateTimeFormat('en', {month: 'long'}).format
   export let months = [...Array(12).keys()].indexBy(m => m, m => format(new Date(2021, m)))
   if (wholeOption) months['whole'] = wholeOption
 
