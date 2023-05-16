@@ -5,6 +5,7 @@ import jakarta.persistence.Id
 import java.time.Instant
 import java.time.LocalDate
 import java.util.*
+import java.util.UUID.randomUUID
 
 @Entity
 data class Post(
@@ -13,7 +14,7 @@ data class Post(
   val date: LocalDate = LocalDate.now(),
   val createdAt: Instant = Instant.now(),
   val updatedAt: Instant? = null,
-  @Id val id: UUID? = UUID.randomUUID()
+  @Id val id: UUID = randomUUID()
 ) {
   enum class Tags {
     TECH, FUN, TIL, PROGRAMMING, REVIEWS, GAMES, LIFE, RANDOM
