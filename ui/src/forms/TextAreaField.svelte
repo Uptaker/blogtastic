@@ -1,5 +1,4 @@
 <script lang="ts">
-  import {_} from 'src/i18n'
   import FormField from 'src/forms/FormField.svelte'
 
   export let label: string|undefined = undefined
@@ -15,7 +14,7 @@
 
   let textarea: HTMLTextAreaElement
   $: tooLong = inBytes ? encoder.encode(value).length > maxlength : value?.length > maxlength
-  $: textarea?.setCustomValidity(tooLong ? _('errors.tooLong') : '')
+  $: textarea?.setCustomValidity(tooLong ? 'Content too long' : '')
 </script>
 
 <FormField {label} let:id>

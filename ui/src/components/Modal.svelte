@@ -1,5 +1,4 @@
 <script lang="ts">
-  import {_} from 'src/i18n'
   import {fade, fly} from 'svelte/transition'
   import type {FlyParams} from 'svelte/types/runtime/transition'
   import Icon from 'src/icons/Icon.svelte'
@@ -39,7 +38,7 @@
            role="dialog" transition:fly={flyParams}>
         <div class="block absolute top-0 right-0 pt-4 md:pt-8 pr-4 md:pr-8">
           <button type="button" class="bg-white flex items-center justify-center text-gray-400 hover:text-gray-500 h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500" on:click={close}>
-            <span class="sr-only">{_('general.close')}</span>
+            <span class="sr-only">Close</span>
             <Icon name="x"/>
           </button>
         </div>

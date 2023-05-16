@@ -1,24 +1,23 @@
 import {render} from '@testing-library/svelte'
-import {_} from 'src/i18n'
 import UnitsField from './UnitsField.svelte'
 import {fillInput} from 'src/test-utils'
 
 describe('UnitsField', () => {
   it('renders', () => {
-    const {container} = render(UnitsField, {label: 'items.number', units: ['€', '%'], value: 100, unitRatio: 0.01, min: 1, max: 34})
+    const {container} = render(UnitsField, {label: 'Number', units: ['€', '%'], value: 100, unitRatio: 0.01, min: 1, max: 34})
     const input = container.querySelector('input')!
-    expect(input.id).to.eq('items-number')
+    expect(input.id).to.eq('Number')
     expect(input.type).to.eq('number')
     expect(input.step).to.eq('1')
     expect(input.min).to.eq('1')
     expect(input.max).to.eq('34')
     expect(input.value).to.eq('100')
-    expect(container.querySelector('label')!.textContent!.trim()).to.eq(_('items.number'))
+    expect(container.querySelector('label')!.textContent!.trim()).to.eq('Number')
     expect(container.querySelector('select')!.value).to.eq('€')
   })
 
   it('converts on render if not default unit', () => {
-    const {container} = render(UnitsField, {label: 'items.number', units: ['€', '%'], unit: '%', value: 100, unitRatio: 0.1, min: 10, max: 200})
+    const {container} = render(UnitsField, {label: 'Number', units: ['€', '%'], unit: '%', value: 100, unitRatio: 0.1, min: 10, max: 200})
     const input = container.querySelector('input')!
     expect(input.min).to.eq('1')
     expect(input.max).to.eq('20')
@@ -27,7 +26,7 @@ describe('UnitsField', () => {
   })
 
   it('converts value from one unit to another', async () => {
-    const {container, component} = render(UnitsField, {label: 'items.number', value: 123, units: ['€', '%'], unitRatio: 0.04, step: 0.01, min: 10, max: 340})
+    const {container, component} = render(UnitsField, {label: 'Number', value: 123, units: ['€', '%'], unitRatio: 0.04, step: 0.01, min: 10, max: 340})
     const input = container.querySelector('input')!
     expect(input.value).to.eq('123')
 

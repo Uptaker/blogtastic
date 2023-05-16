@@ -1,5 +1,4 @@
 <script lang="ts">
-  import {_} from 'src/i18n'
   import Spinner from 'src/components/Spinner.svelte'
   import {debounce} from 'src/shared/debounce'
 
@@ -59,7 +58,7 @@
                 class:sortable={!!column}
                 class:sorted={sortedBy === sortFields[i]}>
               {#if column}
-                <span class="pr-1">{_((labels && !column.includes('.') ? labels + '.' : '') + column)}</span>
+                <span class="pr-1">{(labels && !column.includes('.') ? labels + '.' : '') + column}</span>
               {/if}
             </th>
           {/if}
@@ -73,7 +72,7 @@
       {#if items}
         {#if !items.length}
           <tr>
-            <td colspan={columns.length} class="text-center">{_('general.noItems')}</td>
+            <td colspan={columns.length} class="text-center">No data to show</td>
           </tr>
         {:else}
           {#each items.slice(0, renderMax) as item, i (item['id'] ?? i)}

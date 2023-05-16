@@ -2,7 +2,7 @@ import {render} from '@testing-library/svelte'
 import Link from './Link.svelte'
 
 describe('Link', () => {
-  const to = 'dashboard'
+  const to = '/dashboard'
   const label = 'test'
 
   it('renders link', async () => {
