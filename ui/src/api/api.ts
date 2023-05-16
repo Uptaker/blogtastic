@@ -1,5 +1,4 @@
 import {versionRefreshNeeded} from '../stores/toasts'
-import mocks from './mocks'
 
 export const headers = {'Content-Type': 'application/json; charset=UTF-8', 'Accept': 'application/json'} as HeadersInit
 
@@ -55,8 +54,6 @@ class Api {
   }
 
   async get<T>(path: string): Promise<T> {
-    const pathNoQuery = path.replace(/\?.*/, '')
-    if (pathNoQuery in mocks) return mocks[pathNoQuery]
     return await this.requestJson(path) as T
   }
 
