@@ -1,9 +1,48 @@
-# Svelte Sample
+# Blogtastic
 
-Sample Svelte setup with Vite, Vitest and i18n.
+Open-source, self-hosted blogging platform for individuals
 
-Includes form elements and other type-safe components.
+---
+#### Technologies:
 
-You are free top copy-paste and modify them for your needs.
+**Server:** Kotlin/Spring/Postgres
 
-All relevant code is in the [ui](ui) directory. This makes it easy to add servers-side code easily into the same repo.
+**UI:** Svelte/TypeScript/Vite/Tailwind
+
+## Development
+
+
+### Docker
+
+Serves Server + UI
+
+```
+docker build . -t blog
+```
+```
+docker run -p 8080:8080 blog
+```
+
+### UI
+
+#### npm start
+
+Runs the app in the development mode.
+Open http://localhost:8000 to view it in the browser.
+
+The page will reload if you make edits.
+
+#### npm check
+
+Will run svelte-check to validate all types with TypeScript.
+
+#### npm test
+
+Runs unit tests using Vitest.
+
+#### npm run build
+
+### Server
+
+Run 'Start Server' run configuration from IntelliJ
+
