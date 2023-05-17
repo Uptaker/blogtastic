@@ -5,7 +5,7 @@ Open-source, self-hosted blogging platform for individuals
 ---
 #### Technologies:
 
-**Server:** Kotlin/Spring/Postgres
+**Server:** Kotlin/Spring/Postgres/Liquibase
 
 **UI:** Svelte/TypeScript/Vite/Tailwind
 
