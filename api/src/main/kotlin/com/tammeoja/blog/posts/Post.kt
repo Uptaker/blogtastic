@@ -2,12 +2,14 @@ package com.tammeoja.blog.posts
 
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
+import jakarta.persistence.Table
 import java.time.Instant
 import java.time.LocalDate
 import java.util.*
 import java.util.UUID.randomUUID
 
 @Entity
+@Table(name = "posts")
 data class Post(
   val title: String,
   val content: String,
@@ -15,9 +17,5 @@ data class Post(
   val createdAt: Instant = Instant.now(),
   val updatedAt: Instant? = null,
   @Id val id: UUID = randomUUID()
-) {
-  enum class Tags {
-    TECH, FUN, TIL, PROGRAMMING, REVIEWS, GAMES, LIFE, RANDOM
-  }
-}
+)
 
