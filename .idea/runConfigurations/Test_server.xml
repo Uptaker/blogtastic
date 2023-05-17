@@ -1,6 +1,18 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Test server" type="GradleRunConfiguration" factoryName="Gradle">
     <ExternalSystemSettings>
+      <option name="env">
+        <map>
+          <entry key="DB_PASSWORD" value="password" />
+          <entry key="DB_PORT" value="5432" />
+          <entry key="DB_URL" value="jdbc:postgresql://localhost:5432/blog" />
+          <entry key="DB_USERNAME" value="bloguser" />
+          <entry key="ENV" value="dev" />
+          <entry key="POSTGRES_DB" value="blog" />
+          <entry key="POSTGRES_PASSWORD" value="password" />
+          <entry key="POSTGRES_USER" value="bloguser" />
+        </map>
+      </option>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$/api" />
       <option name="externalSystemIdString" value="GRADLE" />
@@ -18,6 +30,18 @@
     </ExternalSystemSettings>
     <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
     <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+    <EXTENSION ID="com.intellij.execution.ExternalSystemRunConfigurationJavaExtension">
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
+    </EXTENSION>
     <DebugAllEnabled>false</DebugAllEnabled>
     <ForceTestExec>true</ForceTestExec>
     <method v="2" />
