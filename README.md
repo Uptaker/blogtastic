@@ -14,13 +14,21 @@ Open-source, self-hosted blogging platform for individuals
 
 ### Docker
 
-Serves Server + UI
+Serves Server + DB + UI
 
 ```
 docker build . -t blog
 ```
 ```
 docker run -p 8080:8080 blog
+```
+
+### DB
+
+For just running the DB instance, not the whole docker container. Convenient for development.
+
+```
+docker compose up blogtastic-db -d
 ```
 
 ### UI
