@@ -1,9 +1,9 @@
--- For compatibility with PostgreSQL
-create domain if not exists timestamptz as timestamp;
+--liquibase formatted sql
 
+--changeset blog:posts
 create table if not exists posts
 (
-    id varchar(60) default random_uuid() primary key,
+    id uuid primary key,
     title text,
     content text,
     date date,
