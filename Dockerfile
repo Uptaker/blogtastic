@@ -31,7 +31,6 @@ RUN rm -fr /usr/bin /usr/sbin /bin/ch*
 WORKDIR /app
 COPY --from=build-ui /ui/build public
 COPY --from=build-server /app/build/libs/blog.jar ./
-#COPY .env ./
 
 ARG VERSION=dev
 ENV VERSION=$VERSION

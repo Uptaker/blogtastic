@@ -2,6 +2,16 @@
   <configuration default="false" name="Start server" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <option name="ALTERNATIVE_JRE_PATH" value="corretto-17" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <envs>
+      <env name="DB_PASSWORD" value="password" />
+      <env name="DB_PORT" value="5432" />
+      <env name="DB_URL" value="jdbc:postgresql://localhost:5432/blog" />
+      <env name="DB_USERNAME" value="bloguser" />
+      <env name="ENV" value="dev" />
+      <env name="POSTGRES_DB" value="blog" />
+      <env name="POSTGRES_PASSWORD" value="password" />
+      <env name="POSTGRES_USER" value="bloguser" />
+    </envs>
     <module name="blog.main" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.tammeoja.blog.BlogApplication" />
     <method v="2">
