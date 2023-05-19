@@ -2,7 +2,7 @@
     import icons from './icons'
 
     export let name: string
-  export let size: '' | 'sm' | 'lg' = ''
+  export let size: '' | 'sm' | 'lg' | 'xl' | 'xxl' | 'xxxl' | 'xxxxl' = ''
 </script>
 
 {@html icons[name].replace('<svg', `<svg class="icon ${name} ${size} ${$$props.class ?? ''}" focusable="false"`)}

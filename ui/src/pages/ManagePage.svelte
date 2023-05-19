@@ -16,6 +16,10 @@
         posts = await api.get('posts')
     }
 
+    function createPost() {
+        selected = {} as Post
+    }
+
 
     $: load()
 </script>
@@ -54,7 +58,7 @@
                     <div>Select an existing post to make adjustments</div>
                     <div class="italic text-primary-400 text-sm">⎯⎯ or  ⎯⎯</div>
                     <div>If you have an idea or in the right mood...</div>
-                    <Button class="btn primary w-fit" icon="pencil-plus" label="Write a new Blog post" on:click={() => selected = {}}/>
+                    <Button class="btn primary w-fit" icon="pencil-plus" label="Write a new Blog post" on:click={createPost}/>
                 </div>
             {/if}
         </Card>
