@@ -9,6 +9,6 @@ export interface Post {
     content: string
     date: string
     createdAt: string
-    updatedAt: string
+    updatedAt?: string
     id: string
 }

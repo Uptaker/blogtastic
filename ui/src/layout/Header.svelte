@@ -6,17 +6,27 @@
   import {Role} from 'src/api/types'
   import Badge from 'src/components/Badge.svelte'
 
+  interface Menu {path: string, roles: any[], label: string}
   const menu = [
     {path: '/', label: 'Home', roles: []},
     {path: '/manage', label: 'Manage', roles: [Role.ADMIN]},
-  ]
+  ] as Menu
+
+  function isActive(menu: Menu) {
+    const path = location.pathname
+    if (menu.path === path) return true
+    if (path.startsWith(menu.path)) return
+    return false
+  }
 </script>
 
 <header class="py-4 sm:py-8 flex justify-between items-center">
-  <Logo/>
+  <Link to="/">
+    <Logo/>
+  </Link>
   <div class="flex sm:gap-3 items-center">
     {#each menu as m}
-      <Link to={m.path} label={m.label} class="btn link sm {location.pathname.substring(1).startsWith(m.path) ? 'bg-primary-50' : ''}"/>
+      <Link to={m.path} label={m.label} class="btn link sm {isActive(m) ? 'bg-primary-50' : ''}"/>
     {/each}
     {#if $user}
       <Badge>

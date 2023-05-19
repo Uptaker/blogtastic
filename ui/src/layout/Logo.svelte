@@ -4,5 +4,5 @@
 
 <Link to="">
 <!--  <img class="h-7" src="/img/logo.png" title="Blog of Markus" alt="Blogtastic Logo">-->
-  <h2>Blogtastic</h2>
+  <h2 class="font-bold">Blogtastic</h2>
 </Link>

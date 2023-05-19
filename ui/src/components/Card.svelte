@@ -3,10 +3,11 @@
   export let title: string = ''
   export let subtitle: string = ''
   export let padding = 'card-padding py-5'
+  export let rounding = 'sm:rounded-lg'
   export let split = false
 </script>
 
-<div class="card bg-white shadow sm:rounded-lg -mx-4 sm:mx-0 {padding} {$$props.class ?? ''}">
+<div class="card bg-white shadow -mx-4 sm:mx-0 {rounding} {padding} {$$props.class ?? ''}">
   <div class="common-grid md:grid-cols-3">
     {#if title}
       <div class={split ? 'md:col-span-1': 'md:col-span-3'}>
