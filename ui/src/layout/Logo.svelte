@@ -3,5 +3,6 @@
 </script>
 
 <Link to="">
-  <img class="h-7" src="/img/logo.png" title="Blog of Markus" alt="Blogtastic Logo">
+<!--  <img class="h-7" src="/img/logo.png" title="Blog of Markus" alt="Blogtastic Logo">-->
+  <h2>Blogtastic</h2>
 </Link>

@@ -7,14 +7,15 @@
   import Badge from 'src/components/Badge.svelte'
 
   const menu = [
-    {path: '', label: 'home.title', roles: [Role.ADMIN, Role.TRAINER, Role.CUSTOMER]},
+    {path: '/', label: 'Home', roles: []},
+    {path: '/manage', label: 'Manage', roles: [Role.ADMIN]},
   ]
 </script>
 
 <header class="py-4 sm:py-8 flex justify-between items-center">
   <Logo/>
   <div class="flex sm:gap-3 items-center">
-    {#each menu.filter(m => m.roles.includes($user?.role)) as m}
+    {#each menu as m}
       <Link to={m.path} label={m.label} class="btn link sm {location.pathname.substring(1).startsWith(m.path) ? 'bg-primary-50' : ''}"/>
     {/each}
     {#if $user}
