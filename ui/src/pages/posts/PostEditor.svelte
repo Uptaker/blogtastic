@@ -51,12 +51,9 @@
 </Form>
 
 <style>
-    .border-1 {
-        border: 1px solid;
-    }
-
     .tab {
         cursor: pointer;
-        @apply !border-primary-100 border-1 p-2 bg-primary-50 hover:bg-primary-100
+        border: 1px solid;
+        @apply border-primary-100 p-2 bg-primary-50 hover:bg-primary-100
     }
 </style>
