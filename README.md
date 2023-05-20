@@ -1,6 +1,6 @@
 # Blogtastic
 
-Open-source, self-hosted blogging platform for individuals
+Open-source, self-hosted blogging platform for individuals. **In progress**
 
 ---
 #### Technologies:
