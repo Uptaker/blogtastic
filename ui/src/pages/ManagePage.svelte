@@ -48,15 +48,15 @@
                 <PostEditor post={selected} on:saved={load}/>
             {:else}
                 <div class="spaced h-max flex flex-col justify-between items-center text-center align-middle">
-                    <div class="text-2xl font-bold text-primary-400">
+                    <div class="text-2xl font-bold text-secondary-400">
                         <Icon name="smile" size="xxl"/>
-                         <span class="text-brand-950">+</span>
+                         <span class="text-primary-700">+</span>
                         <Icon name="notes" size="xxl"/>
-                        <span class="text-brand-950">=</span>
+                        <span class="text-primary-700">=</span>
                         <Icon name="heart" size="xxl"/>
                     </div>
                     <div>Select an existing post to make adjustments</div>
-                    <div class="italic text-primary-400 text-sm">⎯⎯ or  ⎯⎯</div>
+                    <div class="italic text-secondary-400 text-sm">⎯⎯ or  ⎯⎯</div>
                     <div>If you have an idea or in the right mood...</div>
                     <Button class="btn primary w-fit" icon="pencil-plus" label="Write a new Blog post" on:click={createPost}/>
                 </div>

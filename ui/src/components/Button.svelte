@@ -41,6 +41,10 @@
     @apply text-white hover:text-white bg-success-400 hover:bg-success-700 focus:ring-success-500
   }
 
+  .btn.secondary {
+    @apply text-white hover:text-white bg-secondary-400 hover:bg-secondary-700 focus:ring-secondary-500
+  }
+
   .btn.link {
     @apply text-primary-600 hover:text-primary-500 hover:bg-primary-100 focus:ring-primary-400
   }

@@ -9,19 +9,53 @@
     import {createEventDispatcher} from "svelte";
 
     export let post: Post
+    let date = new Date()
 
     const dispatch = createEventDispatcher()
 
     async function submit() {
+        if (!post.slug) post.slug = slug
         const message = post.id ? 'Post updated' : 'Post published!'
         post = await api.post('posts', post)
         showToast(message)
         dispatch('saved', post)
     }
+
+    $: slug = post.slug ? post.slug : post.title?.toLowerCase().replace(/[\W_]+/g," ").trim().replaceAll(' ', '-')
 </script>
 
 <Form {submit}>
-    <Button icon={post.id ? 'edit' : 'send'} class="btn primary" type="submit" label={post.id ? 'Update' : 'Publish'}/>
-    <FormField bind:value={post.title} minlength={5} label="Title"/>
-    <TextAreaField bind:value={post.content} rows={20} label="Content"/>
+    <div class="flex gap-4 justify-between">
+        <Button icon={post.id ? 'edit' : 'send'} class="btn primary" type="submit" label={post.id ? 'Update' : 'Publish'}/>
+        {#if slug}
+            {@const pathPos = location.href.lastIndexOf('/manage')}
+            {@const year = date.getFullYear()}
+            {@const month = date.getMonth() + 1}
+            <div class="text-sm">
+                Article will be published on:
+                <div class="text-xs text-primary-700">
+                    {location.href.slice(0, pathPos)}/{year}/{month}/{slug}
+                </div>
+
+            </div>
+        {/if}
+    </div>
+    <div class="grid grid-cols-2 p text-center text-xs text-primary-900">
+        <div class="tab !border-r-0">EDIT</div>
+        <div class="tab">PREVIEW</div>
+    </div>
+    <FormField bind:value={post.title} minlength={5} label="Headline"/>
+    <TextAreaField rows={3} label="Subheadline"/>
+    <TextAreaField bind:value={post.content} rows={20} label="Content" maxlength={20000}/>
 </Form>
+
+<style>
+    .border-1 {
+        border: 1px solid;
+    }
+
+    .tab {
+        cursor: pointer;
+        @apply !border-primary-100 border-1 p-2 bg-primary-50 hover:bg-primary-100
+    }
+</style>
