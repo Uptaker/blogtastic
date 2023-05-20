@@ -6,6 +6,8 @@ export interface AuthenticatedUser {user: User}
 export interface Address {county: string; municipality: string; area?: string; street: string; building: string; apartment?: string; postalCode: string; details?: string; countryCode: CountryCode; id: string;}
 export interface Post {
     title: string
+    subheadline: string
+    slug: string
     content: string
     date: string
     createdAt: string

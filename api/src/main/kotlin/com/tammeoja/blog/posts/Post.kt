@@ -13,6 +13,8 @@ import java.util.UUID.randomUUID
 data class Post(
   val title: String,
   val content: String,
+  val slug: String,
+  val subheadline: String? = null,
   val date: LocalDate = LocalDate.now(),
   val createdAt: Instant = Instant.now(),
   val updatedAt: Instant? = null,

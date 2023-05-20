@@ -9,7 +9,7 @@
     import {createEventDispatcher} from "svelte";
 
     export let post: Post
-    let date = new Date()
+    $: date = new Date(post.date)
 
     const dispatch = createEventDispatcher()
 
@@ -31,10 +31,11 @@
             {@const pathPos = location.href.lastIndexOf('/manage')}
             {@const year = date.getFullYear()}
             {@const month = date.getMonth() + 1}
+            {@const day = date.getDate()}
             <div class="text-sm">
                 Article will be published on:
                 <div class="text-xs text-primary-700">
-                    {location.href.slice(0, pathPos)}/{year}/{month}/{slug}
+                    {location.href.slice(0, pathPos)}/{year}/{month}/{day}/{slug}
                 </div>
 
             </div>
@@ -45,7 +46,7 @@
         <div class="tab">PREVIEW</div>
     </div>
     <FormField bind:value={post.title} minlength={5} label="Headline"/>
-    <TextAreaField rows={3} label="Subheadline"/>
+    <TextAreaField bind:value={post.subheadline} rows={3} label="Subheadline"/>
     <TextAreaField bind:value={post.content} rows={20} label="Content" maxlength={20000}/>
 </Form>
 
