@@ -2,7 +2,7 @@
   import Icon from 'src/icons/Icon.svelte'
 
   export let icon = ''
-  export let size: 'sm'|''|'lg' = ''
+  export let size: 'sm'|''|'lg' = 'sm'
   export let label = ''
   export let type: 'button'|'submit' = 'button'
 
