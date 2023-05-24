@@ -13,4 +13,5 @@ export interface Post {
     createdAt: string
     updatedAt?: string
     id: string
+    userId: string
 }

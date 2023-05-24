@@ -14,6 +14,7 @@ data class Post(
   val title: String,
   val content: String,
   val slug: String,
+  val userId: UUID,
   val subheadline: String? = null,
   val date: LocalDate = LocalDate.now(),
   val createdAt: Instant = Instant.now(),

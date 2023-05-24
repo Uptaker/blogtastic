@@ -7,14 +7,16 @@
     import TextAreaField from "src/forms/TextAreaField.svelte";
     import Button from "src/components/Button.svelte";
     import {createEventDispatcher} from "svelte";
+    import {user} from "src/stores/auth";
 
     export let post: Post
-    $: date = new Date(post.date)
+    $: date = new Date(post.date || Date.now())
 
     const dispatch = createEventDispatcher()
 
     async function submit() {
         if (!post.slug) post.slug = slug
+        if (!post.userId) post.userId = $user.id
         const message = post.id ? 'Post updated' : 'Post published!'
         post = await api.post('posts', post)
         showToast(message)

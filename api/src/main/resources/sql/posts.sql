@@ -16,3 +16,6 @@ alter table posts add column slug text not null default 'REMOVE';
 
 --changeset blog:posts.subheading
 alter table posts add column subheadline text;
+
+--changeset blog:posts.userId
+alter table posts add column user_id uuid not null references users(id);
