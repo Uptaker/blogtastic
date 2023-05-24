@@ -1,7 +1,7 @@
 package com.tammeoja.blog.user
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.tammeoja.blog.user.User.Role.WRITER
+import com.tammeoja.blog.user.User.Role.GUEST
 import jakarta.persistence.*
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
@@ -18,7 +18,7 @@ data class User(
   val email: String,
   @JsonIgnore val passwordHash: String,
   val pictureUrl: URI? = null,
-  @Enumerated(EnumType.STRING) val role: Role = WRITER,
+  @Enumerated(EnumType.STRING) val role: Role = GUEST,
   val createdAt: Instant = Instant.now(),
   @Id val id: UUID = randomUUID()
 ): UserDetails {
@@ -39,6 +39,6 @@ data class User(
   @JsonIgnore override fun isEnabled() = true
 
   enum class Role {
-    ADMIN, WRITER
+    GUEST, WRITER, ADMIN
   }
 }
