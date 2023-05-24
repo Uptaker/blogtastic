@@ -7,5 +7,6 @@ import org.springframework.security.web.context.SecurityContextRepository
 
 @Configuration
 class BeansConfig {
+
   @Bean fun securityContextRepository(): SecurityContextRepository = HttpSessionSecurityContextRepository()
 }

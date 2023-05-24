@@ -10,6 +10,7 @@ import java.util.*
 
 @Service
 class PostService(private val postRepository: PostRepository) {
+
   fun defaultSort(vararg tables: String) = Sort.by(DESC, "createdAt", *tables)
 
   fun list(page: Int): List<Post> = postRepository.findAll(PageRequest.of(maxOf(page - 1, 0), 10).withSort(defaultSort())).toList()
