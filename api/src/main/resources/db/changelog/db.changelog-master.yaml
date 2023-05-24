@@ -1,3 +1,5 @@
 databaseChangeLog:
   - include: 
       file: sql/posts.sql
+  - include:
+      file: sql/users.sql

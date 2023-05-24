@@ -1,12 +1,12 @@
 <script lang="ts">
-  import {logout, user} from 'src/stores/auth'
-  import Logo from 'src/layout/Logo.svelte'
-  import Button from 'src/components/Button.svelte'
-  import Link from 'src/components/Link.svelte'
-  import {Role} from 'src/api/types'
-  import Badge from 'src/components/Badge.svelte'
+    import {logout, user} from 'src/stores/auth'
+    import Logo from 'src/layout/Logo.svelte'
+    import Button from 'src/components/Button.svelte'
+    import Link from 'src/components/Link.svelte'
+    import {Role} from 'src/api/types'
+    import Badge from 'src/components/Badge.svelte'
 
-  interface Menu {path: string, roles: any[], label: string}
+    interface Menu {path: string, roles: any[], label: string}
   const menu: Menu[] = [
     {path: '/', label: 'Home', roles: []},
     {path: '/manage', label: 'Manage', roles: [Role.ADMIN]},
@@ -34,7 +34,9 @@
         <Button icon="x" class="sm -mr-2" on:click={logout} title="Logout"/>
       </Badge>
     {:else}
-      Login
+      <Badge>
+        <Link to="/login">Login</Link>
+      </Badge>
     {/if}
   </div>
 </header>

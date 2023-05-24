@@ -4,6 +4,7 @@
     import NotFoundPage from './layout/NotFoundPage.svelte'
     import HomePage from 'src/pages/HomePage.svelte'
     import ManagePage from "src/pages/ManagePage.svelte";
+    import LoginPage from "src/pages/LoginPage.svelte";
 </script>
 
 <svelte:head>
@@ -16,6 +17,7 @@
   <div class="App min-h-screen flex flex-col">
     <Route path="/" component={HomePage}/>
     <Route path="/manage" component={ManagePage}/>
+    <Route path="/login" component={LoginPage}/>
     <Route component={NotFoundPage}/>
   </div>
 </Router>

@@ -8,28 +8,25 @@
     import FormField from 'src/forms/FormField.svelte'
     import {initSession} from "src/stores/auth";
 
-    export let user: User = {} as User
-  export let savePath = 'user/register'
+    export let login = {} as {email: string, password: string}
 
   const dispatch = createEventDispatcher<{saved: User}>()
 
   async function submit() {
-    user = await api.post<User>(savePath, user)
+    const user = await api.post<User>('user/login', login)
     if (user) initSession(user)
-    showToast('Welcome, ' + user.firstName)
+    showToast('Welcome back, ' + user.firstName)
     dispatch('saved', user)
   }
 </script>
 
 <Form {submit}>
   <div class="common-grid sm:grid-cols-2">
-    <FormField label="Firstname" bind:value={user.firstName} autofocus={!!user.id}/>
-    <FormField label="Lastname" bind:value={user.lastName}/>
-    <FormField label="Email" type="email" bind:value={user.email}/>
-    <FormField label="Password" type="password" bind:value={user.password}/>
+    <FormField label="Email" type="email" bind:value={login.email}/>
+    <FormField label="Password" type="password" bind:value={login.password}/>
   </div>
 
   <div class="flex justify-end">
-    <Button type="submit" label="general.save" class="primary"/>
+    <Button type="submit" label="Login" class="primary"/>
   </div>
 </Form>
