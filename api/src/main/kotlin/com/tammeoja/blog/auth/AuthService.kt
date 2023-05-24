@@ -1,13 +1,11 @@
 package com.tammeoja.blog.auth
 
-import com.tammeoja.blog.security.AuthManager
 import com.tammeoja.blog.user.User
 import com.tammeoja.blog.user.UserRepository
 import com.tammeoja.blog.utils.Request
 import com.tammeoja.blog.utils.Response
+import com.tammeoja.blog.utils.secure
 import jakarta.servlet.http.Cookie
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.time.Instant
@@ -16,36 +14,31 @@ import kotlin.jvm.optionals.getOrNull
 @Service
 class AuthService(
   private val tokenRepository: AuthTokenRepository,
-  private val authManager: AuthManager,
+  private val userRepository: UserRepository,
+  private val passwordEncoder: PasswordEncoder
 ) {
 
   private val cookieName = "AUTH"
 
-
-  @Autowired
-  private lateinit var userRepository: UserRepository
-
-  @Autowired
-  private lateinit var passwordEncoder: PasswordEncoder
-
   fun cookie(req: Request) = req.cookies?.find { it.name == cookieName }
 
-  fun auth(req: UserLoginRequest): User {
+  fun login(req: UserLoginRequest): User {
     val errorMessage = "Invalid email or password"
     val user = userRepository.findByEmail(req.email) ?: error(errorMessage)
     require(passwordEncoder.matches(req.password, user.passwordHash)) { errorMessage }
     return user
   }
 
+  fun register(form: UserRegistrationRequest): User {
+    require(userRepository.findByEmail(form.email) == null) { "Email already exists" }
+    val passwordHash = passwordEncoder.encode(form.password)
+    return userRepository.save(User(form.firstName, form.lastName, form.email, passwordHash))
+  }
+
   fun initSession(user: User, res: Response) {
     val token = tokenRepository.save(AuthToken(user.id))
-    val cookie = Cookie(cookieName, token.token)
-    cookie.secure = true
-    cookie.isHttpOnly = true
-    cookie.path = "/api"
-    cookie.maxAge = (token.expiresAt.epochSecond - token.createdAt.epochSecond).toInt()
+    val cookie = Cookie(cookieName, token.token).secure(token)
     res.addCookie(cookie)
-    authManager.authenticate(UsernamePasswordAuthenticationToken(user, user.passwordHash, user.authorities))
   }
 
   fun validateToken(token: String): User? {
