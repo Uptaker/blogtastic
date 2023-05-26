@@ -12,7 +12,7 @@
   {/if}
 </svelte:head>
 
-<div class="min-h-screen relative bg-gradient-to-r to-orange-100 from-amber-50">
+<div class="min-h-screen relative bg-gradient-to-tl from-orange-100 via-orange-200 to-orange-100">
   <div class="absolute inset-0 flex items-center justify-center -z-10"></div>
 
   <Container {width}>
