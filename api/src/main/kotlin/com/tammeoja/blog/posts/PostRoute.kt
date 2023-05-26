@@ -24,4 +24,10 @@ class PostRoute(private val postService: PostService) {
 
   @GetMapping("/recent")
   fun recent() = postService.recent()
+
+  @GetMapping("/random")
+  fun random() = postService.random()
+
+  @GetMapping("/{slug}")
+  fun slug(@PathVariable slug: String) = postService.bySlug(slug)
 }

@@ -8,8 +8,10 @@
     import Button from "src/components/Button.svelte";
     import {createEventDispatcher} from "svelte";
     import {user} from "src/stores/auth";
+    import {marked} from "marked";
 
     export let post: Post
+    let showPreview = false
     $: date = new Date(post.date || Date.now())
 
     const dispatch = createEventDispatcher()
@@ -31,25 +33,27 @@
         <Button icon={post.id ? 'edit' : 'send'} class="btn primary" type="submit" label={post.id ? 'Update' : 'Publish'}/>
         {#if slug}
             {@const pathPos = location.href.lastIndexOf('/manage')}
-            {@const year = date.getFullYear()}
-            {@const month = date.getMonth() + 1}
-            {@const day = date.getDate()}
             <div class="text-sm">
                 Article will be published on:
                 <div class="text-xs text-primary-700">
-                    {location.href.slice(0, pathPos)}/{year}/{month}/{day}/{slug}
+                    {location.href.slice(0, pathPos)}/{date.fullDate()}/{slug}
                 </div>
 
             </div>
         {/if}
     </div>
-    <div class="grid grid-cols-2 p text-center text-xs text-primary-900">
-        <div class="tab !border-r-0">EDIT</div>
-        <div class="tab">PREVIEW</div>
+
+    <div class="grid grid-cols-2 p text-center text-xs text-primary-900 uppercase">
+        <div class="tab !border-r-0" on:click={() => showPreview = false} class:!bg-primary-200={!showPreview}>EDIT</div>
+        <div class="tab" on:click={() => showPreview = true} class:!bg-primary-200={showPreview}>PREVIEW</div>
     </div>
-    <FormField bind:value={post.title} minlength={5} label="Headline"/>
-    <TextAreaField bind:value={post.subheadline} rows={3} label="Subheadline"/>
-    <TextAreaField bind:value={post.content} rows={20} label="Content" maxlength={20000}/>
+    {#if showPreview}
+        <div>{@html marked.parse(post.content)}</div>
+    {:else}
+        <FormField bind:value={post.title} minlength={5} label="Headline"/>
+        <TextAreaField bind:value={post.subheadline} rows={3} label="Subheadline"/>
+        <TextAreaField bind:value={post.content} rows={20} label="Content" maxlength={20000}/>
+    {/if}
 </Form>
 
 <style>

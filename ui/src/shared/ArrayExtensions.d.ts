@@ -14,3 +14,7 @@ interface Array<T extends any> {
   remove(i: number): this
   replaceById<E extends T & {id: string}>(e: E): this
 }
+
+interface Date {
+  fullDate(): string
+}

@@ -40,4 +40,8 @@ Array.prototype.replaceById = function<T extends {id: string}>(e: T) {
   return this
 }
 
+Date.prototype.fullDate = function() {
+  return this.toISOString().substring(0, 10).replaceAll('-', '/')
+}
+
 export {}

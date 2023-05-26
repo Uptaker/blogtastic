@@ -7,10 +7,8 @@
     import Badge from 'src/components/Badge.svelte'
 
     interface Menu {path: string, roles: any[], label: string}
-  const menu: Menu[] = [
-    {path: '/', label: 'Home', roles: []},
-    {path: '/manage', label: 'Manage', roles: [Role.ADMIN]},
-  ]
+  let menu: Menu[] = []
+  if (['ADMIN', 'WRITER'].includes($user.role)) menu = [...menu, {path: '/manage', label: 'Manage', roles: [Role.ADMIN]}]
 
   function isActive(menu: Menu) {
     const path = location.pathname

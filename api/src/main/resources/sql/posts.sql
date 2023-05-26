@@ -19,3 +19,6 @@ alter table posts add column subheadline text;
 
 --changeset blog:posts.userId
 alter table posts add column user_id uuid not null references users(id);
+
+--changeset blog:posts.slug.idx
+create unique index posts_slug_idx on posts(slug)

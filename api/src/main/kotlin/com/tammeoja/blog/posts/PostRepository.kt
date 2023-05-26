@@ -5,4 +5,6 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface PostRepository: JpaRepository<Post, UUID>
+interface PostRepository: JpaRepository<Post, UUID> {
+  fun findBySlug(slug: String): Post?
+}
