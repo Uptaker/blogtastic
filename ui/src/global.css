@@ -49,6 +49,14 @@
   table th, table td {
     @apply px-0 py-2;
   }
+
+  .markdown {
+    @apply text-primary-900
+  }
+
+  .markdown h1, h2, h3, h4, h5 {
+    @apply mb-5 mt-2
+  }
 }
 
 @tailwind components;

@@ -25,7 +25,7 @@
         dispatch('saved', post)
     }
 
-    $: slug = post.slug ? post.slug : post.title?.toLowerCase().replace(/[\W_]+/g," ").trim().replaceAll(' ', '-')
+    $: slug = post.slug ? post.slug : post.title?.toLowerCase().slice(0, 40).replace(/[\W_]+/g," ").trim().replaceAll(' ', '-')
 </script>
 
 <Form {submit}>
@@ -48,7 +48,7 @@
         <div class="tab" on:click={() => showPreview = true} class:!bg-primary-200={showPreview}>PREVIEW</div>
     </div>
     {#if showPreview}
-        <div>{@html marked.parse(post.content)}</div>
+        <div class="markdown">{@html marked.parse(post.content)}</div>
     {:else}
         <FormField bind:value={post.title} minlength={5} label="Headline"/>
         <TextAreaField bind:value={post.subheadline} rows={3} label="Subheadline"/>
