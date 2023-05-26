@@ -30,11 +30,11 @@ class PostService(private val postRepository: PostRepository) {
 
   fun recent(limit: Int = 4): List<Post> = postRepository.findAll(defaultSort("updatedAt")).take(limit)
 
-  fun random(): List<Post> = postRepository.count().let {
+  fun random(max: Int = 5): List<Post> = postRepository.count().let {
     val qty = it.toInt()
     val randomInts = generateSequence { Random.nextInt(0..qty) }
       .distinct()
-      .take(if (qty >= 5) 5 else qty)
+      .take(if (qty >= max) max else qty)
       .toSet()
     return randomInts.mapNotNull {i ->
       val postPage = postRepository.findAll(PageRequest.of(i, 1))
