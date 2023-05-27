@@ -54,8 +54,12 @@
     @apply text-primary-900
   }
 
+  .markdown p {
+    line-height: 1.75 !important;
+  }
+
   .markdown h1, h2, h3, h4, h5 {
-    @apply mb-5 mt-2
+    @apply mb-5 mt-10
   }
 }
 
