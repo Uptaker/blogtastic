@@ -31,17 +31,17 @@
         {/if}
     </div>
     <div class="grid grid-template gap-1 overflow-y-auto">
-            <SortableTable items={posts} columns={['title', 'Creation Date']} sortFields={[p => p.title, p => p.createdAt]} let:item={p} class="w-full rounded-full">
-                <tr class="text-sm hover:cursor-pointer hover:bg-primary-50" on:click={() => selected = p}
-                    class:bg-primary-100={selected?.id === p.id}>
-                    <td>{p.title}</td>
+            <SortableTable items={posts} columns={['title', 'Creation Date']} sortFields={[p => p.details.title, p => p.details.createdAt]} let:item={p} class="w-full rounded-full">
+                <tr class="text-sm hover:cursor-pointer hover:bg-primary-50" on:click={() => selected = p.details}
+                    class:bg-primary-100={selected?.id === p.details.id}>
+                    <td>{p.details.title}</td>
                     <td class="text-xs">
                         <div title="Creation date">
-                            {new Date(p.createdAt).toLocaleString()}
+                            {new Date(p.details.createdAt).toLocaleString()}
                         </div>
-                        {#if p.updatedAt}
+                        {#if p.details.updatedAt}
                             <div class="text-muted mt-1" title="Last updated">
-                                {new Date(p.updatedAt).toLocaleString()}
+                                {new Date(p.details.updatedAt).toLocaleString()}
                             </div>
                         {/if}
                     </td>

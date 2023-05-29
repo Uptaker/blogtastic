@@ -1,12 +1,12 @@
 <script lang="ts">
     import MainPageLayout from 'src/layout/MainPageLayout.svelte'
-    import type {Post} from "src/api/types";
+    import type {PostInList} from "src/api/types";
     import api from "src/api/api";
     import {marked} from "marked";
     import Card from "src/components/Card.svelte";
 
     export let slug: string
-    let post: Post
+    let post: PostInList
 
     async function load(slug: string) {
         post = await api.get('posts/' + slug)
@@ -17,13 +17,13 @@
 
 <MainPageLayout>
         {#if post}
-            <div class="h-12 flex justify-center items-center py-24 bg-gradient-to-r from-orange-300 to-rose-300">
-                <div class="text-3xl">{post.title}</div>
+            <div class="h-12 flex justify-center items-center py-24 px-4 text-center bg-gradient-to-r from-orange-300 to-rose-300">
+                <div class="text-3xl">{post.details.title}</div>
             </div>
             <div class="xl:w-8/12 mx-auto">
-                <div class="my-16 text-primary-800">{post.subheadline}</div>
+                <div class="my-16 text-primary-800">{post.details.subheadline}</div>
                 <Card>
-                    <div class="markdown">{@html marked.parse(post.content)}</div>
+                    <div class="markdown">{@html marked.parse(post.details.content)}</div>
                 </Card>
             </div>
 

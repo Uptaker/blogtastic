@@ -1,5 +1,6 @@
 package com.tammeoja.blog.posts
 
+import com.tammeoja.blog.user.UserRepository
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.data.domain.Sort.Direction.DESC
@@ -12,11 +13,20 @@ import kotlin.random.nextInt
 
 
 @Service
-class PostService(private val postRepository: PostRepository) {
+class PostService(
+  private val postRepository: PostRepository,
+  private val userRepository: UserRepository
+) {
 
   fun defaultSort(vararg tables: String) = Sort.by(DESC, "createdAt", *tables)
 
-  fun list(page: Int): List<Post> = postRepository.findAll(PageRequest.of(maxOf(page - 1, 0), 10).withSort(defaultSort())).toList()
+  fun list(page: Int): List<PostInList> {
+    val posts = postRepository.findAll(PageRequest.of(maxOf(page - 1, 0), 10).withSort(defaultSort())).toList()
+    return posts.groupBy { it.userId }.flatMap {(userId, posts) ->
+      val user = userRepository.findById(userId).get()
+      posts.map { PostInList(it, PostAuthor(user.id, user.name)) }
+    }
+  }
 
   fun save(post: Post): Post {
     postRepository.apply {
@@ -26,7 +36,9 @@ class PostService(private val postRepository: PostRepository) {
 
   fun get(id: UUID): Post? = postRepository.findByIdOrNull(id)
 
-  fun bySlug(slug: String): Post? = postRepository.findBySlug(slug)
+  fun bySlug(slug: String): PostInList? = postRepository.findBySlug(slug)?.let {
+    PostInList(it, PostAuthor(it.userId, userRepository.findById(it.userId).get().name) )
+  }
 
   fun recent(limit: Int = 4): List<Post> = postRepository.findAll(defaultSort("updatedAt")).take(limit)
 

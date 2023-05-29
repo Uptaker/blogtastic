@@ -15,3 +15,8 @@ export interface Post {
     id: string
     userId: string
 }
+
+export interface PostInList {
+    details: Post,
+    author: User
+}

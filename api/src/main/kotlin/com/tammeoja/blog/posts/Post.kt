@@ -25,3 +25,6 @@ data class Post(
   val fullDate get() = LocalDate.ofInstant(createdAt, systemDefault()).toString().replace('-', '/')
 }
 
+data class PostInList(val details: Post, val author: PostAuthor)
+data class PostAuthor (val userId: UUID, val name: String)
+
