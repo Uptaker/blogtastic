@@ -1,10 +1,13 @@
 <script lang="ts">
-    export let content: string
+    import type {Post} from "src/api/types";
 
-    $: estimate = readEstimate(content)
+    export let post: Post
 
-    function readEstimate(content: string): number {
-        const count =  content.match(/\w+/g).length;
+    $: estimate = readEstimate(post)
+
+    function readEstimate(p: Post): number {
+        const content = p.content + ' ' + p.subheadline
+        const count = content.match(/\w+/g).length;
         return Math.ceil(count / 250)
     }
 </script>

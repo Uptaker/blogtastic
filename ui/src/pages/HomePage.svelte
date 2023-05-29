@@ -28,7 +28,7 @@
                         <div class="flex text-xs text-secondary-500 justify-start gap-3">
                             <div>{new Date(p.details.createdAt).toDateString()}</div>
                             <div>{p.author.name}</div>
-                            <ReadEstimate content={p.details.content + ' ' + p.details.subheadline}/>
+                            <ReadEstimate post={p.details}/>
                         </div>
                     </Card>
                 {/each}
