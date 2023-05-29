@@ -4,6 +4,7 @@
     import type {Post, PostInList} from "src/api/types";
     import api from "src/api/api";
     import {Link} from "svelte-navigator";
+    import ReadEstimate from "src/pages/posts/ReadEstimate.svelte";
 
     let posts: PostInList[]
     let random: Post[]
@@ -25,8 +26,9 @@
                         <Link to="/post/{p.details.fullDate}/{p.details.slug}" class="text-2xl">{p.details.title}</Link>
                         <div class="!text-muted text-sm my-2">{p.details.subheadline}</div>
                         <div class="flex text-xs text-secondary-500 justify-start gap-3">
-                            <div>{p.details.fullDate}</div>
+                            <div>{new Date(p.details.createdAt).toDateString()}</div>
                             <div>{p.author.name}</div>
+                            <ReadEstimate content={p.details.content + ' ' + p.details.subheadline}/>
                         </div>
                     </Card>
                 {/each}
