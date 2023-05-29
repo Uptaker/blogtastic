@@ -3,3 +3,5 @@ databaseChangeLog:
       file: sql/posts.sql
   - include:
       file: sql/users.sql
+  - include:
+      file: sql/images.sql

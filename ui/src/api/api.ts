@@ -17,7 +17,7 @@ class Api {
     return fetch(path, {
       ...init,
       body: body instanceof File || body instanceof FormData || typeof body == 'string' ? body : body && JSON.stringify(body),
-      headers: init?.headers ?? headers
+      headers: init?.headers ? init.headers : body instanceof FormData ? undefined : headers
     })
     .catch(this.handleFetchFailure)
     .finally(() => {
@@ -57,9 +57,11 @@ class Api {
     return await this.requestJson(path) as T
   }
 
-  post<T>(path: string, body?: Body, headers?: HeadersInit): Promise<T> {
-    return this.requestJson(path, {method: 'POST', body, headers})
+  post<T>(path: string, body?: Body, headers?: HeadersInit, handleJson = true): Promise<T> {
+    const init = {method: 'POST', body, headers}
+    return handleJson ? this.requestJson(path, init) : this.request(path, init)
   }
+
 
   put<T>(path: string, body?: Body, headers?: HeadersInit): Promise<T> {
     return this.requestJson(path, {method: 'PUT', body, headers})

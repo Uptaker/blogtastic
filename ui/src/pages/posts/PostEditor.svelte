@@ -11,6 +11,8 @@
     import {marked} from "marked";
 
     export let post: Post
+
+    let image: FileList
     let showPreview = false
     $: date = new Date(post.date || Date.now())
 
@@ -19,10 +21,20 @@
     async function submit() {
         if (!post.slug) post.slug = slug
         if (!post.userId) post.userId = $user.id
-        const message = post.id ? 'Post updated' : 'Post published!'
         post = await api.post('posts', post)
+        if (image) await saveImage()
+        const message = post.id ? 'Post updated' : 'Post published!'
         showToast(message)
         dispatch('saved', post)
+    }
+
+    async function saveImage() {
+        const formData = new FormData()
+        formData.append('image', image[0]);
+        for (const file of image) {
+            console.log(`${file.name}: ${file.size} bytes`);
+        }
+        await api.post('images/post/' + post.id, formData, undefined, false)
     }
 
     $: slug = post.slug ? post.slug : post.title?.toLowerCase().slice(0, 40).replace(/[\W_]+/g," ").trim().replaceAll(' ', '-')
@@ -44,7 +56,6 @@
             <div class="text-xs text-primary-700">
                 {location.href.slice(0, pathPos)}/{date.fullDate()}/{slug}
             </div>
-
         </div>
     {/if}
     {#if showPreview}
@@ -52,6 +63,7 @@
     {:else}
         <FormField bind:value={post.title} minlength={5} label="Headline"/>
         <TextAreaField bind:value={post.subheadline} rows={3} label="Subheadline"/>
+        <input type="file" bind:files={image} accept="image/png, image/jpeg" required={!post.id}>
         <TextAreaField bind:value={post.content} rows={40} label="Content" maxlength={20000}/>
     {/if}
 </Form>

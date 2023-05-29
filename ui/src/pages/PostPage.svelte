@@ -18,7 +18,8 @@
 
 <MainPageLayout>
         {#if post}
-            <div class="h-12 flex justify-center items-center py-24 px-4 text-center bg-gradient-to-r from-orange-300 to-rose-300">
+            <div class="flex justify-around items-center py-12 px-4 text-center ">
+                    <img src="/api/images/{post.details.id}" alt="post main picture" style="width: 300px; height: 300px;"/>
                 <div class="text-3xl">{post.details.title}</div>
             </div>
             <div class="xl:w-8/12 mx-auto flex flex-col gap-12 pt-12">
@@ -28,10 +29,16 @@
                     <ReadEstimate post={post.details}/>
                 </div>
                 <div class="text-primary-800">{post.details.subheadline}</div>
-                <Card>
+                <Card class="mb-5">
                     <div class="markdown">{@html marked.parse(post.details.content)}</div>
                 </Card>
             </div>
 
         {/if}
 </MainPageLayout>
+
+<style>
+    .img-mask {
+        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 50%, transparent 100%);
+    }
+</style>

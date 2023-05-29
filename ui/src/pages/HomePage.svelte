@@ -23,12 +23,17 @@
             {#if posts?.length}
                 {#each posts as p}
                     <Card padding="py-2 px-3">
-                        <Link to="/post/{p.details.fullDate}/{p.details.slug}" class="text-2xl">{p.details.title}</Link>
-                        <div class="!text-muted text-sm my-2">{p.details.subheadline}</div>
-                        <div class="flex text-xs text-secondary-500 justify-start gap-3">
-                            <div>{new Date(p.details.createdAt).toDateString()}</div>
-                            <div>{p.author.name}</div>
-                            <ReadEstimate post={p.details}/>
+                        <div class="flex gap-3">
+                            <img src="/api/images/{p.details.id}" alt="post main picture" style="width: 150px; height: 150px;"/>
+                            <div>
+                                <Link to="/post/{p.details.fullDate}/{p.details.slug}" class="text-2xl">{p.details.title}</Link>
+                                <div class="!text-muted text-sm my-2">{p.details.subheadline}</div>
+                                <div class="flex text-xs text-secondary-500 justify-start gap-3">
+                                    <div>{new Date(p.details.createdAt).toDateString()}</div>
+                                    <div>{p.author.name}</div>
+                                    <ReadEstimate post={p.details}/>
+                                </div>
+                            </div>
                         </div>
                     </Card>
                 {/each}
