@@ -5,3 +5,5 @@ databaseChangeLog:
       file: sql/users.sql
   - include:
       file: sql/images.sql
+  - include:
+      file: sql/tags.sql
