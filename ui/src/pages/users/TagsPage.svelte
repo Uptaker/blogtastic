@@ -7,7 +7,7 @@
     import Modal from "src/components/Modal.svelte";
     import FormField from "src/forms/FormField.svelte";
     import Form from "src/forms/Form.svelte";
-    import {showToast} from "src/stores/toasts";
+    import {showToast, ToastType} from "src/stores/toasts";
 
     let tags: Tag[]
 
@@ -18,7 +18,7 @@
     }
 
     function createTag() {
-        selected = {} as Tag
+        selected = {color: '#2B2B2B'} as Tag
     }
 
     async function submit() {
@@ -30,6 +30,7 @@
 
     async function remove(tagId: string) {
         await api.delete('tags/' + tagId)
+        showToast(tagId + ' deleted', {type: ToastType.INFO})
         tags = tags.filter(t => t.id !== tagId)
     }
 
