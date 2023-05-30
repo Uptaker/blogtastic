@@ -19,3 +19,4 @@ export interface PostInList {
     details: Post,
     author: { userId: string, name: string }
 }
+export interface Tag {id: string, color: string}

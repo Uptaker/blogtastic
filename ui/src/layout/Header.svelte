@@ -8,7 +8,10 @@
 
     interface Menu {path: string, roles: any[], label: string}
   let menu: Menu[] = []
-  if (['ADMIN', 'WRITER'].includes($user.role)) menu = [...menu, {path: '/manage', label: 'Manage', roles: [Role.ADMIN]}]
+  if ($user) {
+    if (['ADMIN', 'WRITER'].includes($user.role)) menu = [...menu, {path: '/manage', label: 'Manage', roles: [Role.ADMIN]}]
+    if (['ADMIN'].includes($user.role)) menu = [...menu, {path: '/tags', label: 'Tags', roles: [Role.ADMIN]}]
+  }
 
   function isActive(menu: Menu) {
     const path = location.pathname

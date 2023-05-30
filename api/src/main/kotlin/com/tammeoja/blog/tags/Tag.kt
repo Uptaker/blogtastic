@@ -7,8 +7,11 @@ import java.util.*
 
 @Entity
 @Table(name = "tags")
-data class Tag(@Id var id: String) {
-  init { id = id.uppercase() }
+data class Tag(@Id var id: String, val color: String) {
+  init {
+    require(color.startsWith('#') && color.length == 7)
+    id = id.uppercase()
+  }
 }
 
 @Entity

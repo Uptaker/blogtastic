@@ -6,6 +6,7 @@
   import ManagePage from "src/pages/ManagePage.svelte";
   import LoginPage from "src/pages/LoginPage.svelte";
   import PostPage from "src/pages/PostPage.svelte";
+  import TagsPage from "src/pages/users/TagsPage.svelte";
 </script>
 
 <svelte:head>
@@ -19,6 +20,7 @@
     <Route path="/" component={HomePage}/>
     <Route path="/post/:year/:month/:day/:slug" component={PostPage}/>
     <Route path="/manage" component={ManagePage}/>
+    <Route path="/tags" component={TagsPage}/>
     <Route path="/login" component={LoginPage}/>
     <Route component={NotFoundPage}/>
   </div>
