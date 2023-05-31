@@ -56,7 +56,10 @@
     <Form {submit}>
         <div class="grid grid-cols-2 spaced gap-3">
             <FormField bind:value={selected.id} label="Label name"/>
-            <FormField type="color" class="h-11" bind:value={selected.color} label="Color"/>
+            <div class="flex flex-col items-start align-top justify-center w-full h-min !m-0">
+                <label for="color">Color</label>
+                <input class="w-full !h-11" type="color" bind:value={selected.color} id="color" required/>
+            </div>
             <div>
                 {#if selected.id && selected.color}
                     <span class="font-bold" style="color: {selected.color}">{selected.id.toUpperCase()}</span>
