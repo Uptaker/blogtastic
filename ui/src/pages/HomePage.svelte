@@ -1,17 +1,19 @@
 <script lang="ts">
     import MainPageLayout from 'src/layout/MainPageLayout.svelte'
     import Card from "src/components/Card.svelte";
-    import type {Post, PostInList} from "src/api/types";
+    import type {Post, PostInList, PostTagCount} from "src/api/types";
     import api from "src/api/api";
     import {Link} from "svelte-navigator";
     import ReadEstimate from "src/pages/posts/ReadEstimate.svelte";
 
     let posts: PostInList[]
     let random: Post[]
+    let tags: PostTagCount[]
 
     async function load() {
         posts = await api.get('posts')
         random = await api.get('posts/random')
+        tags = (await api.get('tags/count')).filter(t => t.count > 0)
     }
 
     $: load()
@@ -41,7 +43,7 @@
                 <Card padding="px-5" class="" title="It's the void!" subtitle="No posts just yet. Please come back later!"/>
             {/if}
         </div>
-        <div class="flex sm:flex-col gap-10 md:gap-20 w-3/12">
+        <div class="flex sm:flex-col gap-10 md:gap-20 w-4/12">
             <Card>
                 <p class="font-bold">Random</p>
                 {#if random?.length}
@@ -51,8 +53,11 @@
                 {/if}
             </Card>
             <Card>
-                <p>Some sidebar content</p>
-                <p>over here</p>
+                {#if tags}
+                    {#each tags as t}
+                        <p class="text-sm" style="color: {t.tag.color}">{t.tag.id} <span class="font-bold">{t.count}</span></p>
+                    {/each}
+                {/if}
             </Card>
         </div>
     </div>

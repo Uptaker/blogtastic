@@ -17,10 +17,10 @@
     $: load(post.id)
 
     async function load(postId: string) {
-        tags = (await api.get(`posts/${postId}/tags`)).map(t => t.tagId)
+        tags = postId ? (await api.get(`posts/${postId}/tags`)).map(t => t.tagId) : []
     }
 
-    let tags: Tag[]
+    let tags: string[]
 
     let image: FileList
     let showPreview = false
