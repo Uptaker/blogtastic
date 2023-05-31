@@ -37,6 +37,8 @@
                         </div>
                     </Card>
                 {/each}
+            {:else}
+                <Card padding="px-5" class="" title="It's the void!" subtitle="No posts just yet. Please come back later!"/>
             {/if}
         </div>
         <div class="flex sm:flex-col gap-10 md:gap-20 w-3/12">

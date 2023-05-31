@@ -41,8 +41,7 @@
     <div slot="header">
         <Button icon="pencil-plus" label="Add" on:click={createTag}/>
     </div>
-    <SortableTable items={tags} columns={['title', '']}
-                   sortFields={[p => p.id, '']} let:item={p}
+    <SortableTable items={tags} columns={['title', '']} sortFields={[p => p.id, '']} let:item={p}
                    class="w-full rounded-full">
         <tr class="text-sm hover:bg-primary-50">
             <td class="font-bold" style="color: {p.color}">{p.id}</td>
