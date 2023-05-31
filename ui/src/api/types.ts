@@ -20,3 +20,4 @@ export interface PostInList {
     author: { userId: string, name: string }
 }
 export interface Tag {id: string, color: string}
+export interface PostTagCount {tag: Tag, count: number}

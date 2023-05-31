@@ -1,7 +1,7 @@
 <script lang="ts">
     import MainPageLayout from 'src/layout/MainPageLayout.svelte'
     import SortableTable from "src/components/SortableTable.svelte";
-    import type {Post} from "src/api/types";
+    import type {Post, Tag} from "src/api/types";
     import api from "src/api/api";
     import Card from "src/components/Card.svelte";
     import PostEditor from "src/pages/posts/PostEditor.svelte";
@@ -9,11 +9,13 @@
     import Icon from "src/icons/Icon.svelte";
 
     let posts: Post[]
+    let allTags: Tag[]
 
     let selected: Post|undefined
 
     async function load() {
         posts = await api.get('posts')
+        allTags = await api.get('tags')
     }
 
     function createPost() {
@@ -49,7 +51,7 @@
             </SortableTable>
         <Card rounding="">
             {#if selected}
-                <PostEditor post={selected} on:saved={load}/>
+                <PostEditor post={selected} on:saved={load} {allTags}/>
             {:else}
                 <div class="spaced h-max flex flex-col justify-between items-center text-center align-middle">
                     <div class="text-2xl font-bold text-secondary-400">

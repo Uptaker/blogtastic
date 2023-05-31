@@ -1,6 +1,9 @@
 package com.tammeoja.blog.posts
 
+import com.tammeoja.blog.tags.PostTag
+import com.tammeoja.blog.tags.PostTagRepository
 import com.tammeoja.blog.user.UserRepository
+import jakarta.transaction.Transactional
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.data.domain.Sort.Direction.DESC
@@ -15,7 +18,8 @@ import kotlin.random.nextInt
 @Service
 class PostService(
   private val postRepository: PostRepository,
-  private val userRepository: UserRepository
+  private val userRepository: UserRepository,
+  private val postTagRepository: PostTagRepository
 ) {
 
   fun defaultSort(vararg tables: String) = Sort.by(DESC, "createdAt", *tables)
@@ -28,9 +32,13 @@ class PostService(
     }
   }
 
-  fun save(post: Post): Post {
+  @Transactional
+  fun save(req: PostSaveRequest): Post {
     postRepository.apply {
-      return if (existsById(post.id)) save(post.copy(updatedAt = Instant.now())) else save(post)
+      val saved = if (existsById(req.post.id)) save(req.post.copy(updatedAt = Instant.now())) else save(req.post)
+      postTagRepository.deleteAllByPostId(saved.id)
+      req.tags.forEach { postTagRepository.save(PostTag(saved.id, it)) }
+      return saved
     }
   }
 

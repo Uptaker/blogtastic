@@ -1,7 +1,7 @@
 <script lang="ts">
     import MainPageLayout from 'src/layout/MainPageLayout.svelte'
     import SortableTable from "src/components/SortableTable.svelte";
-    import type {Tag} from "src/api/types";
+    import type {PostTagCount, Tag} from "src/api/types";
     import api from "src/api/api";
     import Button from "src/components/Button.svelte";
     import Modal from "src/components/Modal.svelte";
@@ -9,12 +9,12 @@
     import Form from "src/forms/Form.svelte";
     import {showToast, ToastType} from "src/stores/toasts";
 
-    let tags: Tag[]
+    let tags: PostTagCount[]
 
     let selected: Tag|undefined = undefined
 
     async function load() {
-        tags = await api.get('tags')
+        tags = await api.get('tags/count')
     }
 
     function createTag() {
@@ -41,12 +41,13 @@
     <div slot="header">
         <Button icon="pencil-plus" label="Add" on:click={createTag}/>
     </div>
-    <SortableTable items={tags} columns={['title', '']} sortFields={[p => p.id, '']} let:item={p}
+    <SortableTable items={tags} columns={['title', 'posts', '']} sortFields={[t => t.tag.id, t => t.count, '']} let:item={t}
                    class="w-full rounded-full">
         <tr class="text-sm hover:bg-primary-50">
-            <td class="font-bold" style="color: {p.color}">{p.id}</td>
+            <td class="font-bold" style="color: {t.tag.color}">{t.tag.id}</td>
+            <td class="font-bold">{t.count}</td>
             <td>
-                <Button label="Delete" class="danger" on:click={() => remove(p.id)}/>
+                <Button label="Delete" class="danger" on:click={() => remove(t.tag.id)}/>
             </td>
         </tr>
     </SortableTable>

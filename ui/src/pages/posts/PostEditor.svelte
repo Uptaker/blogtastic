@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {Post} from "src/api/types";
+    import type {Post, Tag} from "src/api/types";
     import Form from "src/forms/Form.svelte";
     import api from "src/api/api";
     import {showToast} from "src/stores/toasts";
@@ -9,8 +9,18 @@
     import {createEventDispatcher} from "svelte";
     import {user} from "src/stores/auth";
     import {marked} from "marked";
+    import MultipleSelect from "src/forms/MultipleSelect.svelte";
 
     export let post: Post
+    export let allTags: Tag[]
+
+    $: load(post.id)
+
+    async function load(postId: string) {
+        tags = (await api.get(`posts/${postId}/tags`)).map(t => t.tagId)
+    }
+
+    let tags: Tag[]
 
     let image: FileList
     let showPreview = false
@@ -21,7 +31,7 @@
     async function submit() {
         if (!post.slug) post.slug = slug
         if (!post.userId) post.userId = $user.id
-        post = await api.post('posts', post)
+        post = await api.post('posts', {post, tags})
         if (image) await saveImage()
         const message = post.id ? 'Post updated' : 'Post published!'
         showToast(message)
@@ -42,7 +52,10 @@
 
 <Form {submit}>
     <div class="flex gap-4 justify-between">
-        <Button icon={post.id ? 'edit' : 'send'} class="btn primary" type="submit" label={post.id ? 'Update' : 'Publish'}/>
+        <Button icon={post.id ? 'edit' : 'send'} class="btn primary h-min" type="submit" label={post.id ? 'Update' : 'Publish'}/>
+        <div>
+            <MultipleSelect label="Tags" options={allTags.indexBy(t => t.id, t => t.id)} bind:values={tags}/>
+        </div>
     </div>
 
     <div class="grid grid-cols-2 p text-center text-xs text-primary-900 uppercase">

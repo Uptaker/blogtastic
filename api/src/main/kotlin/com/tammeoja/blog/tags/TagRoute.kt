@@ -15,7 +15,7 @@ class TagRoute(
 
   @GetMapping("/count")
   fun tagPostCount(): List<PostTagCount> =
-    postTagRepository.findAll().groupBy { it.tagId }.map { PostTagCount(it.key, it.value.size) }
+    tagRepository.findAll().map { PostTagCount(it, postTagRepository.countAllByTagId(it.id)) }
 
   @PostMapping
   fun save(@RequestBody tag: Tag) = tagRepository.save(tag)
@@ -28,4 +28,4 @@ class TagRoute(
 
 }
 
-data class PostTagCount(val tag: String, val count: Int)
+data class PostTagCount(val tag: Tag, val count: Int)
