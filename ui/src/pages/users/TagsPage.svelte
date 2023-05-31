@@ -31,7 +31,7 @@
     async function remove(tagId: string) {
         await api.delete('tags/' + tagId)
         showToast(tagId + ' deleted', {type: ToastType.INFO})
-        tags = tags.filter(t => t.id !== tagId)
+        tags = tags.filter(t => t.tag.id !== tagId)
     }
 
     $: load()
