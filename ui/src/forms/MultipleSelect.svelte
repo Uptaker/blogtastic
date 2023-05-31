@@ -28,7 +28,7 @@
 </script>
 
 <FormField {label}>
-  <div class="flex flex-row flex-wrap items-center gap-2">
+  <div class="flex flex-row flex-wrap items-center gap-2 {$$props.class ?? ''}">
     {#each values ?? [] as key}
       <Badge>{options?.[key]} {#if !disabled}<a on:click={() => remove(key)}><Icon name="x"/></a>{/if}</Badge>
     {/each}

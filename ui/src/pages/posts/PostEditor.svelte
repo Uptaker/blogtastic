@@ -54,7 +54,7 @@
     <div class="flex gap-4 justify-between">
         <Button icon={post.id ? 'edit' : 'send'} class="btn primary h-min" type="submit" label={post.id ? 'Update' : 'Publish'}/>
         <div>
-            <MultipleSelect label="Tags" options={allTags.indexBy(t => t.id, t => t.id)} bind:values={tags}/>
+            <MultipleSelect class="text-xs !font-bold" label="Tags" options={allTags.indexBy(t => t.id, t => t.id)} bind:values={tags}/>
         </div>
     </div>
 
